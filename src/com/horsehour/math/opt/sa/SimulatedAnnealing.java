@@ -11,6 +11,7 @@ import java.util.Random;
  */
 public class SimulatedAnnealing {
 	public int iter = 100;
+
 	public double temperature = 10000.0;
 	public double minTemperature = 0.00001;
 	public double boltzman = 0.9999;

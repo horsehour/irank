@@ -230,9 +230,9 @@ public class Ace {
 
 		CategoryPlot plot = chart.getCategoryPlot();
 
-//		NumberAxis axis = (NumberAxis) plot.getRangeAxis();
-//		axis.setAutoRange(true);
-//		axis.setAutoRangeIncludesZero(false);
+		// NumberAxis axis = (NumberAxis) plot.getRangeAxis();
+		// axis.setAutoRange(true);
+		// axis.setAutoRangeIncludesZero(false);
 		double[] bound = getBound(dataset);
 		plot.getRangeAxis().setRange(bound[0] * 0.99, bound[1]);
 
@@ -240,7 +240,7 @@ public class Ace {
 		renderer.setBarPainter(new StandardBarPainter());
 		renderer.setShadowVisible(false);
 		renderer.setItemMargin(0.01);// margin between bars
-		
+
 		plot.setRenderer(renderer);
 
 		show(chart);
@@ -258,17 +258,17 @@ public class Ace {
 				dataset.addValue(data.get(i).get(j), rowLabels.get(i), columnLabels.get(j));
 		}
 		double[] bound = getBound(dataset);
-		
+
 		JFreeChart chart = ChartFactory.createBarChart("", "", "", dataset, PlotOrientation.VERTICAL, true, true,
 				false);
 
 		CategoryPlot plot = chart.getCategoryPlot();
-		
-//		NumberAxis axis = (NumberAxis) plot.getRangeAxis();
-//		axis.setAutoRange(true);
-//		axis.setAutoRangeIncludesZero(false);
+
+		// NumberAxis axis = (NumberAxis) plot.getRangeAxis();
+		// axis.setAutoRange(true);
+		// axis.setAutoRangeIncludesZero(false);
 		plot.getRangeAxis().setRange(bound[0] * 0.99, bound[1]);
-		
+
 		BarRenderer renderer = new BarRenderer();
 		renderer.setBarPainter(new StandardBarPainter());
 		renderer.setShadowVisible(false);
@@ -580,8 +580,7 @@ public class Ace {
 		renderer.setBaseShape(shape);
 
 		plot.setDataset(numCAT, dataset);
-		plot.setRenderer(numCAT, renderer); 
-		
+		plot.setRenderer(numCAT, renderer);
 
 		JFreeChart chart = new JFreeChart("", plot);
 		show(chart);
@@ -907,7 +906,7 @@ public class Ace {
 		grid(numRow, numCol, chartList);
 	}
 
-	public static void main(String[] args) {
+	public static void main1212(String[] args) {
 		TickClock.beginTick();
 
 		Ace ace = new Ace("");
@@ -920,7 +919,7 @@ public class Ace {
 		double[][] data = new double[nSample][2];
 		double[] x = new double[nSample];
 		double[][] y = new double[nSample][1];
-		
+
 		for (int i = 0; i < nSample; i++) {
 			double x1 = MathLib.Rand.uniform(-5, 5);
 			double x2 = MathLib.Rand.uniform(-5, 5);
@@ -930,9 +929,10 @@ public class Ace {
 				labelList.add("-1");
 			data[i][0] = x1;
 			data[i][1] = x2;
-			x[i] = -5 +  i * 10.0 / nSample;
-			//2x1 + 3x2 - 1 = 0
-			y[i][0] = 1.0/3 - 2.0/3 * x[i];
+
+			x[i] = -5 + i * 10.0 / nSample;
+			// 2x1 + 3x2 - 1 = 0
+			y[i][0] = 1.0 / 3 - 2.0 / 3 * x[i];
 		}
 
 		ace.scatterline("x1", "x2", Arrays.asList("f"), labelList, data, x, y);
