@@ -1,6 +1,5 @@
 package com.horsehour.ml.metric;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.horsehour.util.MathLib;
@@ -28,18 +27,8 @@ public class DCG extends Metric {
 		return getTopKDCG(desireList, predictList)[k - 1];
 	}
 
-	public <T extends Number, P extends Number>  double[] getTopKDCG(List<T> desireList, List<P> predictList) {
-		List<T> label = new ArrayList<>();
-		List<P> score = new ArrayList<>();
-		label.addAll(desireList);
-		score.addAll(predictList);
-		
-//		List<Double> list = new ArrayList<>();
-//		for (int i = 0; i < desireList.size(); i++)
-//			list.add(desireList.get(i).doubleValue());
-
-		MathLib.linkedSort(score, label, false);// 基于score对label降序排列
-		return getTopKDCG(label);
+	public <T extends Number, P extends Number> double[] getTopKDCG(List<T> desireList, List<P> predictList) {
+		return getTopKDCG(MathLib.linkedSort(desireList, predictList, false));
 	}
 
 	/**
@@ -47,7 +36,7 @@ public class DCG extends Metric {
 	 * in permutation based on predicted scores, i = 1,2,...,k;
 	 * 
 	 * @param label
-	 *            排序后的真实标签
+	 *            ground truth after resorting
 	 * @return
 	 */
 	protected double[] getTopKDCG(List<? extends Number> label) {

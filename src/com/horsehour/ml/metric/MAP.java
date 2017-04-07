@@ -1,12 +1,11 @@
 package com.horsehour.ml.metric;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.horsehour.util.MathLib;
 
 /**
- * 实现了MAP(Mean Average Precision)标准度量
+ * MAP(Mean Average Precision)
  * 
  * @author Chunheng Jiang
  * @version 3.0
@@ -15,20 +14,10 @@ import com.horsehour.util.MathLib;
 public class MAP extends Metric {
 	private int[] rel = { 0, 1, 1, 1 };
 
-	public MAP() {
-	}
+	public MAP() {}
 
-	/**
-	 * 度量模型的性能表现
-	 */
-	public double measure(List<? extends Number> desire,
-	        List<? extends Number> predict) {
-		List<Number> label = new ArrayList<Number>();
-		List<Number> score = new ArrayList<Number>();
-		label.addAll(desire);
-		score.addAll(predict);
-
-		MathLib.linkedSort(score, label, false);
+	public double measure(List<? extends Number> desire, List<? extends Number> predict) {
+		List<? extends Number> label = MathLib.linkedSort(desire, predict, false);
 		int sz = label.size();
 		int nRel = 0;
 		double averagePrecision = 0;
@@ -42,8 +31,8 @@ public class MAP extends Metric {
 			}
 		}
 
-		if (nRel == 0)// 表明整个列表相关等级相同,统一设置为1较妥
-			return 0;
+		if (nRel == 0)
+			return 1;
 
 		return averagePrecision / nRel;
 	}

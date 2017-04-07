@@ -135,6 +135,7 @@ public class DEARank extends RankTrainer {
 	/**
 	 * 筛选备选模型（性能最好）
 	 */
+	@SuppressWarnings("unchecked")
 	protected void selectCandidate(){
 		if (topkWeak == -1)
 			return;
@@ -147,8 +148,8 @@ public class DEARank extends RankTrainer {
 			meanperf.add(MathLib.Data.mean(perfMatrix[i]));
 		}
 
-		MathLib.linkedSort(meanperf, id, false);// 降序排列
-
+		id = (List<Integer>) MathLib.linkedSort(id, meanperf,false);// 降序排列
+		
 		if (topkWeak > m)
 			topkWeak = m;
 

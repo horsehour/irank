@@ -5,22 +5,11 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 采样，
- * 
- * @author double
- * 
+ * @author Chunheng Jiang
+ * @since Mar 22, 2017
+ * @version 1.0
  */
 public class Sampler {
-
-	/**
-	 * 在0~num之间（不包括num）按照rate的比率采样
-	 * 
-	 * @param num
-	 *            采样整数的上界
-	 * @param rate
-	 *            比率
-	 * @return 采样结果
-	 */
 	public static List<Integer> sampling(int num, double rate) {
 		List<Integer> result = new ArrayList<Integer>();
 		if (num <= 0 || rate <= 0) {

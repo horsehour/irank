@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 参数训练
- * 
- * @author double
- * @data 2013-03-20
- * @version 0.1
+ * @author Chunheng Jiang
+ * @since Mar 22, 2013
+ * @version 1.0
  */
 public class Trainer {
 	public int nTree = 10;

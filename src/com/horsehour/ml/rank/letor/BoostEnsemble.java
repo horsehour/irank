@@ -122,6 +122,7 @@ public class BoostEnsemble extends RankTrainer {
 	/**
 	 * 筛选备选模型
 	 */
+	@SuppressWarnings("unchecked")
 	protected void selectCandidate(){
 		if (topkWeak == -1)
 			return;
@@ -133,9 +134,8 @@ public class BoostEnsemble extends RankTrainer {
 			id.add(i);
 			meanperf.add(MathLib.Data.mean(perfMatrix[i]));
 		}
-
-		MathLib.linkedSort(meanperf, id, true);// 降序排列
-
+		id = (List<Integer>) MathLib.linkedSort(id, meanperf, true);
+		
 		if (topkWeak > m)
 			topkWeak = m;
 

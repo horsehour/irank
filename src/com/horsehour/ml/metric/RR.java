@@ -19,7 +19,7 @@ public class RR extends Metric {
 
 	@Override
 	public double measure(List<? extends Number> desire, List<? extends Number> predict) {
-		MathLib.linkedSort(predict, desire, false);
+		desire = MathLib.linkedSort(desire, predict, false);
 		double rr = 0;
 		for (int idx = 0; idx < desire.size(); idx++)
 			if (desire.get(idx).doubleValue() > 0) {

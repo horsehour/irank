@@ -1,6 +1,5 @@
 package com.horsehour.ml.metric;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,12 +23,7 @@ public class MAPNDCG extends Metric {
 	 */
 	public double measure(List<? extends Number> desire,
 	        List<? extends Number> predict) {
-		List<Number> label = new ArrayList<Number>();
-		List<Number> score = new ArrayList<Number>();
-		label.addAll(desire);
-		score.addAll(predict);
-
-		MathLib.linkedSort(score, label, false);// 基于score对label降序排列
+		List<? extends Number> label = MathLib.linkedSort(desire, predict, false);
 		double dcg = gains[label.get(0).intValue()];
 
 		int sz = label.size();

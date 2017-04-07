@@ -29,7 +29,7 @@ public class ERR extends Metric {
 	@Override
 	public double measure(List<? extends Number> desireList,
 	        List<? extends Number> predictList) {
-		MathLib.linkedSort(predictList, desireList, false);
+		desireList = MathLib.linkedSort(desireList, predictList, false);
 		for (int i = 0; i < desireList.size(); i++)
 			satisfactionProb.add(desireList.get(i).doubleValue());
 

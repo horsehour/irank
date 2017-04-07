@@ -1,6 +1,5 @@
 package com.horsehour.ml.metric;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,12 +31,7 @@ public class NDCG extends DCG {
 		if (k > desire.size())
 			return 0;
 
-		List<Number> label = new ArrayList<Number>();
-		List<Number> score = new ArrayList<Number>();
-		label.addAll(desire);
-		score.addAll(predict);
-		MathLib.linkedSort(score, label, false);// 基于score对label降序排列
-
+		List<? extends Number> label = MathLib.linkedSort(desire, predict, false);
 		double[] dcg = getTopKDCG(label);
 		Collections.sort(label, Collections.reverseOrder());
 		double[] idcg = getTopKDCG(label);

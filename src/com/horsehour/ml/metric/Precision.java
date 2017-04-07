@@ -1,12 +1,17 @@
 package com.horsehour.ml.metric;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.horsehour.util.MathLib;
 
 /**
- * 精度
+ * Information retrieval associates to search relevant documents. However, the
+ * retrieval tool used makes some mistakes. It returns a lot of documents after
+ * the user submits her query. Some of the returned documents may be irrelevant
+ * to the query, some of them may be relevant. We expect that the retrieval
+ * system could be able to fetch as many relevant documents as possible. The
+ * metric used to measure such performance is precision. It is the percentage of
+ * relevant and correctly selected documents to all returned documents.
  * 
  * @author Chunheng Jiang
  * @version 4.0
@@ -17,10 +22,10 @@ import com.horsehour.util.MathLib;
  */
 public class Precision extends Metric {
 	private int k = 10;
+	// r = 0, rel = 0; r >= 1, rel = 1
 	private int[] rel = { 0, 1, 1, 1 };
 
-	public Precision() {
-	}
+	public Precision() {}
 
 	public Precision(int k) {
 		this.k = k;
@@ -33,14 +38,7 @@ public class Precision extends Metric {
 	}
 
 	public Double[] getTopKPrecision(List<? extends Number> desire, List<? extends Number> predict) {
-		List<Number> label = new ArrayList<Number>();
-		List<Number> score = new ArrayList<Number>();
-		label.addAll(desire);
-		score.addAll(predict);
-
-		MathLib.linkedSort(score, label, false);
-
-		return getTopKPrecision(label);
+		return getTopKPrecision(MathLib.linkedSort(desire, predict, false));
 	}
 
 	private Double[] getTopKPrecision(List<? extends Number> label) {

@@ -29,8 +29,7 @@ public class ANN extends Classifier {
 	private Double[] pred;
 	private Layer outputLayer;
 
-	public ANN() {
-	}
+	public ANN() {}
 
 	@Override
 	public void train() {
@@ -97,7 +96,7 @@ public class ANN extends Classifier {
 
 		net.nIter = 500;
 
-		String data = "/Users/chjiang/Documents/csc/dataset.txt";
+		String data = "csc/dataset.txt";
 		SampleSet sampleset = Data.loadSampleSet(data);
 
 		SampleSet testset = sampleset.pollSamples(0.3f);

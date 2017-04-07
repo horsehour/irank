@@ -15,6 +15,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 /**
  * A Mathematical Utility.
  * 
@@ -1743,7 +1745,6 @@ public final class MathLib {
 		}
 
 		/**
-		 * 
 		 * @param a
 		 *            vector
 		 * @return a*a'
@@ -1776,7 +1777,6 @@ public final class MathLib {
 		}
 
 		/**
-		 * 
 		 * @param a
 		 * @param c
 		 *            = a * a'
@@ -3686,8 +3686,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> x.get(j).compareTo(x.get(i))).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> x.get(j).compareTo(x.get(i))).mapToInt(e -> e).toArray();
 
 		T max = x.get(rank[0]);
 		return Arrays.stream(rank).filter(i -> x.get(i) == max).toArray();
@@ -3735,8 +3735,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> Integer.compare(x[j], x[i])).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> Integer.compare(x[j], x[i])).mapToInt(e -> e).toArray();
 
 		int max = x[rank[0]];
 		return Arrays.stream(rank).filter(i -> x[i] == max).toArray();
@@ -3763,8 +3763,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> Float.compare(x[j], x[i])).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> Float.compare(x[j], x[i])).mapToInt(e -> e).toArray();
 
 		float max = x[rank[0]];
 		return Arrays.stream(rank).filter(i -> x[i] == max).toArray();
@@ -3791,8 +3791,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> Double.compare(x[j], x[i])).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> Double.compare(x[j], x[i])).mapToInt(e -> e).toArray();
 
 		double max = x[rank[0]];
 		return Arrays.stream(rank).filter(i -> x[i] == max).toArray();
@@ -3825,8 +3825,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> x.get(i).compareTo(x.get(j))).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> x.get(i).compareTo(x.get(j))).mapToInt(e -> e).toArray();
 
 		T min = x.get(rank[0]);
 		return Arrays.stream(rank).filter(i -> x.get(i) == min).toArray();
@@ -3874,8 +3874,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> Integer.compare(x[i], x[j])).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> Integer.compare(x[i], x[j])).mapToInt(e -> e).toArray();
 
 		int min = x[rank[0]];
 		return Arrays.stream(rank).filter(i -> x[i] == min).toArray();
@@ -3902,8 +3902,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> Float.compare(x[i], x[j])).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> Float.compare(x[i], x[j])).mapToInt(e -> e).toArray();
 
 		float min = x[rank[0]];
 		return Arrays.stream(rank).filter(i -> x[i] == min).toArray();
@@ -3930,8 +3930,8 @@ public final class MathLib {
 		if (n <= 0)
 			return null;
 
-		int[] rank = IntStream.range(0, n).boxed().sorted((i, j) -> Double.compare(x[i], x[j])).mapToInt(e -> e)
-				.toArray();
+		int[] rank =
+				IntStream.range(0, n).boxed().sorted((i, j) -> Double.compare(x[i], x[j])).mapToInt(e -> e).toArray();
 
 		double min = x[rank[0]];
 		return Arrays.stream(rank).filter(i -> x[i] == min).toArray();
@@ -3976,14 +3976,20 @@ public final class MathLib {
 	 * @param list
 	 * @param ascend
 	 */
-	public static void linkedSort(List<? extends Number> reference, List<? extends Number> list, boolean ascend) {
-		int len = reference.size();
+	public static List<? extends Number> linkedSort(List<? extends Number> truth, List<? extends Number> predict,
+			boolean ascend) {
+		int len = truth.size();
 		if (len <= 1)
-			return;
+			return null;
+
 		int inv = ascend ? 1 : -1;
 
-		list.sort((a, b) -> inv * (Double.compare(reference.get(list.indexOf(a)).doubleValue(),
-				reference.get(list.indexOf(b)).doubleValue())));
+		List<Pair<? extends Number, ? extends Number>> zip = new ArrayList<>();
+		for (int i = 0; i < predict.size(); i++)
+			zip.add(Pair.of(truth.get(i), predict.get(i)));
+
+		zip.sort((p1, p2) -> inv * Double.compare(p1.getRight().doubleValue(), p2.getRight().doubleValue()));
+		return zip.stream().map(p -> p.getLeft()).collect(Collectors.toList());
 	}
 
 	public static class Series {

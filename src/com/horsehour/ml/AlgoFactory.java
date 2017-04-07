@@ -65,7 +65,7 @@ public class AlgoFactory {
 	 * @param name
 	 * @return rank trainer with the specific name
 	 */
-	public static RankTrainer loadTrainer(String name){
+	public static RankTrainer loadTrainer(String name) {
 		RankTrainer trainer = null;
 
 		// boosting
@@ -108,7 +108,7 @@ public class AlgoFactory {
 	 * @param name
 	 * @return metric with the specific name
 	 */
-	public static Metric loadMetric(String name){
+	public static Metric loadMetric(String name) {
 		Metric metric = null;
 
 		int k;// top k
@@ -156,7 +156,7 @@ public class AlgoFactory {
 	 * @param name
 	 * @return normalizer with the specific name
 	 */
-	public static DataScale loadNormalizer(String name){
+	public static DataScale loadNormalizer(String name) {
 		DataScale dataScale = null;
 		if (name.equalsIgnoreCase("max"))
 			dataScale = new MaxScale();
@@ -175,7 +175,7 @@ public class AlgoFactory {
 	 * @param name
 	 * @return classifier which has the specific name
 	 */
-	public static Classifier loadClassifier(String name){
+	public static Classifier loadClassifier(String name) {
 		Classifier classifier = null;
 		if (name.equalsIgnoreCase("AdaBoost"))
 			classifier = new AdaBoost();
@@ -195,14 +195,14 @@ public class AlgoFactory {
 			classifier = new NaiveBayes();
 		else if (name.equalsIgnoreCase("PCM"))
 			classifier = new PCM();
-//		else if (name.equalsIgnoreCase("Pegasos"))
-//			classifier = new Pegasos();
+		// else if (name.equalsIgnoreCase("Pegasos"))
+		// classifier = new Pegasos();
 		else if (name.equalsIgnoreCase("SMO"))
 			classifier = new SMO();
 		return classifier;
 	}
 
-	public static Recommender loadRecommender(String name){
+	public static Recommender loadRecommender(String name) {
 		Recommender rec = null;
 
 		if (name.equalsIgnoreCase("AsymItemSVDPlusPlus"))
@@ -239,5 +239,5 @@ public class AlgoFactory {
 			rec = new UserCF();
 		return rec;
 	}
-	
+
 }
