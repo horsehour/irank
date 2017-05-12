@@ -49,13 +49,10 @@ public class Precision extends Metric {
 			int r = 0;
 			if (i < sz)
 				r = label.get(i).intValue();
-
 			if (rel[r] == 1)
 				nRel++;
-
-			precisionAtN[i] = (double) nRel / (i + 1);
+			precisionAtN[i] = nRel * 1.0 / (i + 1);
 		}
-
 		return precisionAtN;
 	}
 
